@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="activo">
+		<class>com.co.modelo.Persona</class>
+		<class>com.co.modelo.Ciudad</class>
+		<class>com.co.modelo.Estadoinmueble</class>
+		<class>com.co.modelo.Tipoinmueble</class>
 	</persistence-unit>
+	
 </persistence>
