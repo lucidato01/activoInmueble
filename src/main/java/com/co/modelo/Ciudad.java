@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ciudad")
 @NamedQueries({
-   @NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c")})
+@NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c")})
 public class Ciudad implements Serializable {
 
     
@@ -38,8 +38,8 @@ public class Ciudad implements Serializable {
    @Basic(optional = false)
    @Column(name = "nombreCiudad")
    private String nombreCiudad;
-    
-    
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCiudad")
+   private List<Areaciudad> areaciudadList;
 
    public Ciudad() {
    }
@@ -69,7 +69,13 @@ public class Ciudad implements Serializable {
        this.nombreCiudad = nombreCiudad;
    }
 
- 
+   public List<Areaciudad> getAreaciudadList() {
+       return areaciudadList;
+   }
+
+   public void setAreaciudadList(List<Areaciudad> areaciudadList) {
+       this.areaciudadList = areaciudadList;
+   }
 
    @Override
    public int hashCode() {
