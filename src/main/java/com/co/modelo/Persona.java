@@ -1,108 +1,100 @@
 package com.co.modelo;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Fabian
  */
 @Entity
-@Table(name = "persona", catalog = "activo", schema = "")
-@XmlRootElement
-@NamedQueries({ @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p"),
-		@NamedQuery(name = "Persona.findByCedulaPersona", query = "SELECT p FROM Persona p WHERE p.cedulaPersona = :cedulaPersona"),
-		@NamedQuery(name = "Persona.findByNombresPersona", query = "SELECT p FROM Persona p WHERE p.nombresPersona = :nombresPersona") })
+@Table(name = "persona")
+@NamedQueries({
+    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")})
 public class Persona implements Serializable {
 
-	/**
+    
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 2584268610206364477L;
+	private static final long serialVersionUID = 7868690480557217398L;
 	@Id
-	@Basic(optional = false)
-	@NotNull
-	@Size(min = 1, max = 10)
-	@Column(name = "cedulaPersona", nullable = false, length = 10)
-	private String cedulaPersona;
-	@Basic(optional = false)
-	@NotNull
-	@Size(min = 1, max = 100)
-	@Column(name = "nombresPersona", nullable = false, length = 100)
-	private String nombresPersona;
+    @Basic(optional = false)
+    @Column(name = "cedulaPersona")
+    private String cedulaPersona;
+    @Basic(optional = false)
+    @Column(name = "nombresPersona")
+    private String nombresPersona;
+    @OneToMany(mappedBy = "cedulaPersona")
+    private List<Asignacioninmueble> asignacioninmuebleList;
 
-	public Persona() {
-	}
+    public Persona() {
+    }
 
-	public Persona(String cedulaPersona, String nombresPersona) {
-		this.cedulaPersona = cedulaPersona;
-		this.nombresPersona = nombresPersona;
-	}
+    public Persona(String cedulaPersona) {
+        this.cedulaPersona = cedulaPersona;
+    }
 
-	public String getCedulaPersona() {
-		return cedulaPersona;
-	}
+    public Persona(String cedulaPersona, String nombresPersona) {
+        this.cedulaPersona = cedulaPersona;
+        this.nombresPersona = nombresPersona;
+    }
 
-	public void setCedulaPersona(String cedulaPersona) {
-		this.cedulaPersona = cedulaPersona;
-	}
+    public String getCedulaPersona() {
+        return cedulaPersona;
+    }
 
-	public String getNombresPersona() {
-		return nombresPersona;
-	}
+    public void setCedulaPersona(String cedulaPersona) {
+        this.cedulaPersona = cedulaPersona;
+    }
 
-	public void setNombresPersona(String nombresPersona) {
-		this.nombresPersona = nombresPersona;
-	}
+    public String getNombresPersona() {
+        return nombresPersona;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cedulaPersona == null) ? 0 : cedulaPersona.hashCode());
-		result = prime * result + ((nombresPersona == null) ? 0 : nombresPersona.hashCode());
-		return result;
-	}
+    public void setNombresPersona(String nombresPersona) {
+        this.nombresPersona = nombresPersona;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Persona other = (Persona) obj;
-		if (cedulaPersona == null) {
-			if (other.cedulaPersona != null)
-				return false;
-		} else if (!cedulaPersona.equals(other.cedulaPersona))
-			return false;
-		if (nombresPersona == null) {
-			if (other.nombresPersona != null)
-				return false;
-		} else if (!nombresPersona.equals(other.nombresPersona))
-			return false;
-		return true;
-	}
+    public List<Asignacioninmueble> getAsignacioninmuebleList() {
+        return asignacioninmuebleList;
+    }
 
-	@Override
-	public String toString() {
-		return "Persona [cedulaPersona=" + cedulaPersona + ", nombresPersona=" + nombresPersona + "]";
-	}
+    public void setAsignacioninmuebleList(List<Asignacioninmueble> asignacioninmuebleList) {
+        this.asignacioninmuebleList = asignacioninmuebleList;
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (cedulaPersona != null ? cedulaPersona.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Persona)) {
+            return false;
+        }
+        Persona other = (Persona) object;
+        if ((this.cedulaPersona == null && other.cedulaPersona != null) || (this.cedulaPersona != null && !this.cedulaPersona.equals(other.cedulaPersona))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "mapeose.Persona[ cedulaPersona=" + cedulaPersona + " ]";
+    }
+    
 }
